@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeechScribe By Hexbee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SpeechScribe(语音转写)</h1>
+        <div class="settings">
+            <div class="setting-item">
+                <label for="sampleRate">采样率：</label>
+                <select id="sampleRate">
+                    <option value="16000">16 kHz (适合语音)</option>
+                    <option value="44100" selected>44.1 kHz (CD 质量)</option>
+                    <option value="48000">48 kHz (专业录音)</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label for="audioBitsPerSecond">音频质量：</label>
+                <select id="audioBitsPerSecond">
+                    <option value="64000">64 kbps (一般质量)</option>
+                    <option value="128000" selected>128 kbps (标准质量)</option>
+                    <option value="192000">192 kbps (高质量)</option>
+                </select>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="recordButton" class="record-button">
+                <i class="fas fa-microphone"></i>
+                <span>开始录音</span>
+            </button>
+            <div class="save-option">
+                <label>
+                    <input type="checkbox" id="saveAudio"> 保存录音文件
+                </label>
+            </div>
+        </div>
+        <div class="status ready" id="status">
+            <span class="status-indicator"></span>
+            <span class="status-text">准备就绪</span>
+            <span class="timer" id="timer"></span>
+        </div>
+        <div class="result">
+            <div class="result-header">
+                <h2 class="section-title">完整转写</h2>
+                <div class="result-actions">
+                    <div class="font-size-control">
+                        <button class="icon-button" title="减小字体" onclick="changeFontSize('transcription', -1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="icon-button" title="重置字体" onclick="resetFontSize('transcription')">
+                            <i class="fas fa-font"></i>
+                        </button>
+                        <button class="icon-button" title="增大字体" onclick="changeFontSize('transcription', 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <button id="copyText" class="icon-button" title="复制文本">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="expandText" class="icon-button" title="展开/收起">
+                        <i class="fas fa-expand-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="transcription-wrapper">
+                <p id="transcription"></p>
+            </div>
+            
+            <div class="result-header">
+                <h2 class="section-title">带时间戳的转写</h2>
+                <div class="segments-controls">
+                    <div class="font-size-control">
+                        <button class="icon-button" title="减小字体" onclick="changeFontSize('segments', -1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="icon-button" title="重置字体" onclick="resetFontSize('segments')">
+                            <i class="fas fa-font"></i>
+                        </button>
+                        <button class="icon-button" title="增大字体" onclick="changeFontSize('segments', 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <select id="pageSize">
+                        <option value="5">每页 5 条</option>
+                        <option value="10" selected>每页 10 条</option>
+                        <option value="20">每页 20 条</option>
+                    </select>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+            <div id="segments" class="segments"></div>
+            
+            <div id="downloadSection" class="download-section" style="display: none;">
+                <h2>录音文件：</h2>
+                <button id="downloadAudio">下载录音</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
