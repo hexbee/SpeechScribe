@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  flask_app:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - /path/to/whisper:/root/.cache/whisper # 修改这里存储whisper模型的位置
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8080:80"  # 将本地 8080 端口映射到容器的 80 端口
+      - "443:443"  # 暴露 HTTPS 端口
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/nginx/ssl  # 挂载 SSL 证书
+    depends_on:
+      - flask_app

@@ -1,0 +1,25 @@
+# Python 虚拟环境
+.venv/
+venv/
+env/
+
+# 临时目录
+tmp/
+
+# Python 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 临时音频文件
+temp_audio.wav
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 录音文件
+recordings/
+
+# SSL
+ssl/
