@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_file
 import whisper
+import torch
 from whisper.utils import get_writer
 import os
 import zipfile
@@ -16,7 +17,8 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    cuda_available = torch.cuda.is_available()
+    return render_template('index.html', cuda_available=cuda_available)
 
 
 @app.route('/transcribe', methods=['POST'])

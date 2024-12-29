@@ -652,6 +652,28 @@ button:disabled {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
+.cuda-status {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.cuda-status .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--success-color);
+}
+
+.cuda-status .status-text {
+    color: var(--text-secondary);
+}
+
 .status.ready .status-indicator {
     background-color: var(--primary-color);
     animation: pulse-glow 2s infinite;

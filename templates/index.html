@@ -12,6 +12,10 @@
 <body>
     <div class="container">
         <h1>语音转写</h1>
+        <div class="cuda-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">CUDA 加速: {{ '可用' if cuda_available else '不可用' }}</span>
+        </div>
         <div class="settings">
             <div class="setting-item">
                 <label for="sampleRate">采样率：</label>
