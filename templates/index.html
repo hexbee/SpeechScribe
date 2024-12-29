@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>语音转写</h1>
-        <div class="cuda-status">
+        <div class="cuda-status {% if not cuda_available %}cuda-unavailable{% endif %}">
             <span class="status-indicator"></span>
             <span class="status-text">CUDA 加速: {{ '可用' if cuda_available else '不可用' }}</span>
         </div>

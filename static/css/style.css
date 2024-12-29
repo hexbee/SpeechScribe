@@ -3,6 +3,7 @@
     --primary-dark: #4f46e5;
     --success-color: #10b981;
     --success-dark: #059669;
+    --warning-color: #ffa500;
     --background-color: #f8fafc;
     --card-background: rgba(255, 255, 255, 0.8);
     --text-primary: #1e293b;
@@ -668,6 +669,10 @@ button:disabled {
     height: 8px;
     border-radius: 50%;
     background-color: var(--success-color);
+}
+
+.cuda-status.cuda-unavailable .status-indicator {
+    background-color: var(--warning-color);
 }
 
 .cuda-status .status-text {
