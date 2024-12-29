@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeechScribe By Hexbee</title>
+    <title>语音转写应用</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>SpeechScribe(语音转写)</h1>
+        <h1>语音转写</h1>
         <div class="settings">
             <div class="setting-item">
                 <label for="sampleRate">采样率：</label>
@@ -33,10 +35,12 @@
                 <i class="fas fa-microphone"></i>
                 <span>开始录音</span>
             </button>
-            <div class="save-option">
-                <label>
-                    <input type="checkbox" id="saveAudio"> 保存录音文件
-                </label>
+            <div class="file-upload">
+                <input type="file" id="audioFile" accept=".wav,.mp3,.ogg,.flac,.aac">
+                <button id="uploadButton" class="upload-button">
+                    <i class="fas fa-upload"></i>
+                    <span>上传文件</span>
+                </button>
             </div>
         </div>
         <div class="status ready" id="status">
@@ -45,62 +49,62 @@
             <span class="timer" id="timer"></span>
         </div>
         <div class="result">
-            <div class="result-header">
-                <h2 class="section-title">完整转写</h2>
-                <div class="result-actions">
-                    <div class="font-size-control">
-                        <button class="icon-button" title="减小字体" onclick="changeFontSize('transcription', -1)">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button class="icon-button" title="重置字体" onclick="resetFontSize('transcription')">
-                            <i class="fas fa-font"></i>
-                        </button>
-                        <button class="icon-button" title="增大字体" onclick="changeFontSize('transcription', 1)">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <button id="copyText" class="icon-button" title="复制文本">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                    <button id="expandText" class="icon-button" title="展开/收起">
-                        <i class="fas fa-expand-alt"></i>
+            <div id="previewSection" class="preview-section">
+                <div class="preview-header">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">转写结果预览</span>
+                    <button id="togglePreview" class="toggle-button">
+                        <i class="fas fa-chevron-down"></i>
                     </button>
                 </div>
-            </div>
-            <div class="transcription-wrapper">
-                <p id="transcription"></p>
-            </div>
-            
-            <div class="result-header">
-                <h2 class="section-title">带时间戳的转写</h2>
-                <div class="segments-controls">
-                    <div class="font-size-control">
-                        <button class="icon-button" title="减小字体" onclick="changeFontSize('segments', -1)">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button class="icon-button" title="重置字体" onclick="resetFontSize('segments')">
-                            <i class="fas fa-font"></i>
-                        </button>
-                        <button class="icon-button" title="增大字体" onclick="changeFontSize('segments', 1)">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <select id="pageSize">
-                        <option value="5">每页 5 条</option>
-                        <option value="10" selected>每页 10 条</option>
-                        <option value="20">每页 20 条</option>
-                    </select>
-                    <div class="pagination" id="pagination"></div>
+                <div class="preview-content">
+                    <pre id="previewText"></pre>
                 </div>
             </div>
-            <div id="segments" class="segments"></div>
-            
             <div id="downloadSection" class="download-section" style="display: none;">
-                <h2>录音文件：</h2>
-                <button id="downloadAudio">下载录音</button>
+                <div class="file-selection">
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="audio" checked>
+                            录音文件 (.wav)
+                        </label>
+                    </div>
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="txt" checked>
+                            转写文本 (.txt)
+                        </label>
+                    </div>
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="srt" checked>
+                            字幕文件 (.srt)
+                        </label>
+                    </div>
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="vtt" checked>
+                            WebVTT 文件 (.vtt)
+                        </label>
+                    </div>
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="tsv" checked>
+                            TSV 文件 (.tsv)
+                        </label>
+                    </div>
+                    <div class="file-item">
+                        <label>
+                            <input type="checkbox" class="file-checkbox" data-file="json" checked>
+                            JSON 文件 (.json)
+                        </label>
+                    </div>
+                </div>
+                <button id="downloadSelected">下载选中的文件</button>
             </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html> 
+
+</html>
