@@ -19,6 +19,8 @@ async function toggleRecording() {
             audioChunks = [];
 
             document.getElementById('downloadSection').style.display = 'none';
+            document.getElementById('previewSection').style.display = 'none';
+            document.getElementById('previewText').textContent = '';
 
             // 获取用户设置的参数
             const sampleRate = parseInt(document.getElementById('sampleRate').value);
@@ -252,6 +254,11 @@ function handleFileUpload() {
         return;
     }
 
+    // 清除之前的结果
+    document.getElementById('downloadSection').style.display = 'none';
+    document.getElementById('previewSection').style.display = 'none';
+    document.getElementById('previewText').textContent = '';
+
     // 更新状态
     updateStatus('processing', '处理中...');
 
@@ -306,6 +313,6 @@ document.getElementById('togglePreview').addEventListener('click', () => {
 // 页面加载时设置初始状态
 document.addEventListener('DOMContentLoaded', () => {
     updateStatus('ready', '准备就绪');
-    // 默认展开预览区域
-    document.getElementById('previewSection').classList.remove('collapsed');
+    // 默认隐藏预览区域
+    document.getElementById('previewSection').style.display = 'none';
 });
