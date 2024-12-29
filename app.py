@@ -7,7 +7,8 @@ import zipfile
 from datetime import datetime
 
 app = Flask(__name__)
-model = whisper.load_model("turbo")
+MODEL_NAME = "turbo"
+model = whisper.load_model(MODEL_NAME)
 UPLOAD_FOLDER = 'recordings'
 
 # 确保上传文件夹存在
@@ -18,7 +19,8 @@ if not os.path.exists(UPLOAD_FOLDER):
 @app.route('/')
 def index():
     cuda_available = torch.cuda.is_available()
-    return render_template('index.html', cuda_available=cuda_available)
+    return render_template(
+        'index.html', cuda_available=cuda_available, model_name=MODEL_NAME)
 
 
 @app.route('/transcribe', methods=['POST'])

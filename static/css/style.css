@@ -653,8 +653,15 @@ button:disabled {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.cuda-status {
+.status-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     margin: 1rem 0;
+}
+
+.cuda-status,
+.model-status {
     padding: 0.5rem 1rem;
     background-color: var(--card-background);
     border-radius: 8px;
@@ -662,6 +669,14 @@ button:disabled {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.model-status .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--success-color);
 }
 
 .cuda-status .status-indicator {
